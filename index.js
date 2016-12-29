@@ -1,7 +1,7 @@
 'use strict';
 const fetch = require('node-fetch');
 
-var normalizeUrl = function (url) {
+const normalizeUrl = function (url) {
   url = url.indexOf('://') === -1 ? 'http://' + url : url
   url = url.replace(/\/$/, '')
   if (!/:\d+/.test(url)) url += ':2379'
@@ -35,7 +35,7 @@ class Client {
     }
     return this._Request('range', 'POST', JSON.stringify(basicOption))
     .then((data) => {
-      if(data.kvs || data.kvs.length > 0){
+      if((data.kvs || data.kvs.length > 0) && !raw){
         data.kvs = data.kvs.map((e) => {
           e.key = new Buffer(e.key, 'base64').toString();
           e.value = new Buffer(e.value, 'base64').toString();
@@ -58,7 +58,7 @@ class Client {
       key: b64(key),
       value: b64(value),
       lease: opt.lease || 0,
-      prev_kv: opt.prev_kv || undefined
+      prev_kv: opt.prev_kv || false 
     }
     return this._Request('put', 'POST', JSON.stringify(option));
   }

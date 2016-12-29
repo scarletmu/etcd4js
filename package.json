@@ -1,5 +1,5 @@
 {
-  "name": "node-etcd",
+  "name": "etcd4js",
   "version": "0.1.0",
   "description": "Basic Support For ETCD",
   "main": "index.js",
