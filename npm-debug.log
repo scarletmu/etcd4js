@@ -1,0 +1,104 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'publish' ]
+2 info using npm@2.15.9
+3 info using node@v4.6.0
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/scarletmu/nodejs/node-etcd',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/scarletmu/.npm/etcd4js/0.1.0/package.tgz not in flight; packing
+9 verbose correctMkdir /Users/scarletmu/.npm correctMkdir not in flight; initializing
+10 verbose tar pack [ '/Users/scarletmu/.npm/etcd4js/0.1.0/package.tgz',
+10 verbose tar pack   '/Users/scarletmu/nodejs/node-etcd' ]
+11 verbose tarball /Users/scarletmu/.npm/etcd4js/0.1.0/package.tgz
+12 verbose folder /Users/scarletmu/nodejs/node-etcd
+13 info prepublish etcd4js@0.1.0
+14 verbose addLocalTarball adding from inside cache /Users/scarletmu/.npm/etcd4js/0.1.0/package.tgz
+15 verbose correctMkdir /Users/scarletmu/.npm correctMkdir not in flight; initializing
+16 silly cache afterAdd etcd4js@0.1.0
+17 verbose afterAdd /Users/scarletmu/.npm/etcd4js/0.1.0/package/package.json not in flight; writing
+18 verbose correctMkdir /Users/scarletmu/.npm correctMkdir not in flight; initializing
+19 verbose afterAdd /Users/scarletmu/.npm/etcd4js/0.1.0/package/package.json written
+20 silly publish { name: 'etcd4js',
+20 silly publish   version: '0.1.0',
+20 silly publish   description: 'Basic Support For ETCD',
+20 silly publish   main: 'index.js',
+20 silly publish   scripts: { test: 'echo "Error: no test specified" && exit 1' },
+20 silly publish   repository:
+20 silly publish    { type: 'git',
+20 silly publish      url: 'git+https://github.com/scarletmu/etcd4js.git' },
+20 silly publish   author: { name: 'scarletmu' },
+20 silly publish   license: 'MIT',
+20 silly publish   bugs: { url: 'https://github.com/scarletmu/etcd4js/issues' },
+20 silly publish   homepage: 'https://github.com/scarletmu/etcd4js#readme',
+20 silly publish   dependencies: { 'node-fetch': '^1.6.3' },
+20 silly publish   readme: '# Intro\n\nThis is a basical client support for  etcd v3 gRPC-gateway  api\n\n\n## Install && Init\n``` js\nconst etcd4js = require(\'etcd4js\')\nlet store = new etcd4js(\'127.0.0.1:2379\')\n```\n\n## Usage\nNow ``Put()`` and ``Range()`` can work,Other is still in progress.\n\n### `.Put(key, [opt])`\n\nOffical Doc: Put puts the given key into the key-value store. A put request increments the revision of the key-value store and generates one event in the event history.  \n#### option value\n``` js\n{\n  lease: 0,\n  prev_kv: false\n}\n```\n\n### `.Range(key, value, [opt])`\n\nOffical Doc: Range gets the keys in the range from the key-value store.\n  \n#### option value\n``` js\n{\n  range_end: //base64type,\n  limit: 0,\n  revision: 0,\n  seriliazable: false,\n  keys_only: false,\n  count_only: false\n}\n```',
+20 silly publish   readmeFilename: 'README.MD',
+20 silly publish   gitHead: '9bc9f6b51fe2b74594093d7969bca7d6d455dc73',
+20 silly publish   _id: 'etcd4js@0.1.0',
+20 silly publish   _shasum: '8e48e38b553ca3e8bbfe827b82b193d913ce0600',
+20 silly publish   _from: '.' }
+21 verbose getPublishConfig undefined
+22 silly mapToRegistry name etcd4js
+23 silly mapToRegistry using default registry
+24 silly mapToRegistry registry https://registry.npmjs.org/
+25 silly mapToRegistry data Result {
+25 silly mapToRegistry   raw: 'etcd4js',
+25 silly mapToRegistry   scope: null,
+25 silly mapToRegistry   name: 'etcd4js',
+25 silly mapToRegistry   rawSpec: '',
+25 silly mapToRegistry   spec: 'latest',
+25 silly mapToRegistry   type: 'tag' }
+26 silly mapToRegistry uri https://registry.npmjs.org/etcd4js
+27 verbose publish registryBase https://registry.npmjs.org/
+28 silly publish uploading /Users/scarletmu/.npm/etcd4js/0.1.0/package.tgz
+29 verbose request uri https://registry.npmjs.org/etcd4js
+30 verbose request sending authorization for write operation
+31 info attempt registry request try #1 at 18:18:21
+32 verbose request using bearer token for auth
+33 verbose request id 2ed6c4b92f7941f5
+34 http request PUT https://registry.npmjs.org/etcd4js
+35 http 403 https://registry.npmjs.org/etcd4js
+36 verbose headers { 'content-type': 'application/json',
+36 verbose headers   'cache-control': 'max-age=300',
+36 verbose headers   'content-length': '95',
+36 verbose headers   'accept-ranges': 'bytes',
+36 verbose headers   date: 'Thu, 29 Dec 2016 10:18:23 GMT',
+36 verbose headers   via: '1.1 varnish',
+36 verbose headers   connection: 'keep-alive',
+36 verbose headers   'x-served-by': 'cache-itm7424-ITM',
+36 verbose headers   'x-cache': 'MISS',
+36 verbose headers   'x-cache-hits': '0',
+36 verbose headers   'x-timer': 'S1483006702.618494,VS0,VE612',
+36 verbose headers   vary: 'Accept-Encoding' }
+37 verbose request invalidating /Users/scarletmu/.npm/registry.npmjs.org/etcd4js on PUT
+38 error publish Failed PUT 403
+39 verbose stack Error: "You cannot publish over the previously published version 0.1.0." : etcd4js
+39 verbose stack     at makeError (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+39 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:252:14)
+39 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+39 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:200:22)
+39 verbose stack     at emitTwo (events.js:87:13)
+39 verbose stack     at Request.emit (events.js:172:7)
+39 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1067:10)
+39 verbose stack     at emitOne (events.js:82:20)
+39 verbose stack     at Request.emit (events.js:169:7)
+39 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:988:12)
+40 verbose statusCode 403
+41 verbose pkgid etcd4js
+42 verbose cwd /Users/scarletmu/nodejs/node-etcd
+43 error Darwin 16.1.0
+44 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "publish"
+45 error node v4.6.0
+46 error npm  v2.15.9
+47 error code E403
+48 error "You cannot publish over the previously published version 0.1.0." : etcd4js
+49 error If you need help, you may report this error at:
+49 error     <https://github.com/npm/npm/issues>
+50 verbose exit [ 1, true ]
