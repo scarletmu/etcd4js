@@ -1,0 +1,22 @@
+{
+  "name": "node-etcd",
+  "version": "0.1.0",
+  "description": "Basic Support For ETCD",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scarletmu/node-etcd.git"
+  },
+  "author": "scarletmu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/scarletmu/node-etcd/issues"
+  },
+  "homepage": "https://github.com/scarletmu/node-etcd#readme",
+  "dependencies": {
+    "node-fetch": "^1.6.3"
+  }
+}
