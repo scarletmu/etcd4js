@@ -14,7 +14,16 @@ let client = new Client();
 //   console.log(err);
 // })
 
-client.Range('nase', {raw: false})
+// client.Range('nase', {raw: false})
+// .then((data) => {
+//   console.log(data);
+// })
+// .catch((err) => {
+//   console.log(error);
+//   console.log(err);
+// })
+
+client.DeleteRange('nase')
 .then((data) => {
   console.log(data);
 })

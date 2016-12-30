@@ -68,8 +68,15 @@ class Client {
   /**
    * DeleteRange
    */
-  DeleteRange(){
-
+  DeleteRange(key, opt){
+    if(!key) return Promise.reject('Missing Key');
+    if(!opt) opt = {};
+    let option = {
+      key: b64(key),
+      prev_kv: opt.prev_kv || false
+    }
+    if(opt.range_end) option.range_end = b64(range_end);
+    return this._Request('deleterange', 'POST', JSON.stringify(option));
   }
   /**
    * Txn
@@ -80,8 +87,11 @@ class Client {
   /**
    * Compact
    */
-  Compact(){
-
+  Compact(revision, opt){
+    if(!revision) return Promise.reject('Missing Revision!');
+    if(!opt) opt = {};
+    let option = { physical: opt.physical || false };
+    return this._Request('compact', 'POST', JSON.stringify(option));
   }
   /**
    * Request
