@@ -33,6 +33,9 @@ class Client {
       keys_only: opt.keys_only || false,
       count_only: opt.count_only || false
     }
+    if(opt.range_end){
+      basicOption.range_end = b64(range_end);
+    }
     return this._Request('range', 'POST', JSON.stringify(basicOption))
     .then((data) => {
       if((data.kvs || data.kvs.length > 0) && !raw){

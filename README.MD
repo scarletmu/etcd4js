@@ -35,6 +35,7 @@ Offical Doc: Range gets the keys in the range from the key-value store.
   revision: 0,
   seriliazable: false,
   keys_only: false,
-  count_only: false
+  count_only: false,
+  raw: false //Personal Option, Default false means that won't auto decrypt base64 key/value in return
 }
 ```
