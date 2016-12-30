@@ -4,15 +4,38 @@ This is a basical client support for  etcd v3 gRPC-gateway  api
 
 
 ## Install && Init
-``` js
-const etcd4js = require('etcd4js')
-let store = new etcd4js('127.0.0.1:2379')
-```
+``npm install etcd4js``
 
 ## Usage
 Now ``Txn()`` is still in progress.  
 V3 Api require base64 key/value and range_end.This plugin will auto change it.Just input normal string in function.
 
+``` js
+const etcd4js = require('etcd4js')
+let store = new etcd4js('127.0.0.1:2379')
+
+let key = 'hello';
+let value = 'world';
+
+//Use Default Option
+store.Put(key, value)
+.then((res) => {
+  //result
+})
+.catch((err) => {
+  //error
+})
+
+//Use Personal Option
+store.Range(key, {count_only: true})
+.then((res) => {
+  //Only Return Count Result
+})
+.catch((err) => {
+  //Error
+})
+```
+## API 
 ### `.Put(key, [opt])`
 
 Offical Doc: Put puts the given key into the key-value store. A put request increments the revision of the key-value store and generates one event in the event history.  
