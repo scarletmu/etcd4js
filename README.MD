@@ -1,7 +1,7 @@
 # Intro
 
-This is a basical client support for  etcd v3 gRPC-gateway  api
-
+This is a basical client support for etcd v3 gRPC-gateway `KV` api  
+*Attention* : Now only KV service can use restful gRPC-gateway.Waiting 3.1 Release.
 
 ## Install && Init
 ``npm install etcd4js``
