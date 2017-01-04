@@ -19,10 +19,10 @@ class V2client {
     let body = { value, ttl };
     return this._Request('keys', key, 'PUT', body);
   }
-  // /**
-  //  * get
-  //  * @param key 
-  //  */
+  /**
+   * get
+   * @param key 
+   */
   get(key){
     return this._Request('keys', key, 'GET');
   }  
@@ -32,9 +32,9 @@ class V2client {
   update(key, value, ttl){
     return this.set(key, value, ttl);
   }
-  // /**
-  //  * rm
-  //  */
+  /**
+   * rm
+   */
   rm(key){
     return this._Request('keys', key, 'DELETE')
   }
@@ -66,12 +66,6 @@ class V2client {
     key = key.concat('?dir=true');
     return this._Request('keys', key, 'DELETE');
   }
-  // /**
-  //  * updatedir
-  //  */
-  // updatedir(key){
-
-  // }
   /**
    * ls
    */

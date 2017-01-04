@@ -38,6 +38,11 @@ describe('V2Api', () => {
       })
     })
   })
+  describe('#refresh', () => {
+    it('Should Refresh Key: nase TTL', () => {
+      return clientv2.refresh('nase', 50).should.be.fulfilled();
+    })
+  })
   describe('#get', () => {
     it('Should Get Key: nase Value: tech', () => {
       return clientv2.get('nase')
@@ -58,6 +63,17 @@ describe('V2Api', () => {
     it('Should rm Key: nase', () => {
       return clientv2.rm('nase').should.be.fulfilled();
     })
+  })
+  describe('#wait', () => {
+    it('Should Complete Wait in Key: running', () => {
+      //Moke Add
+      setTimeout(() => {
+        clientv2.set('running', 'test')
+        .then((data) => {})
+      }, 20)
+      return clientv2.wait('running').should.be.fulfilled();
+    })
+   
   })
   describe('Dir', () => {
     describe('#mkdir', () => {
