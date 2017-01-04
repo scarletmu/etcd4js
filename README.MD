@@ -1,17 +1,17 @@
 # Intro
 
-This is a basical client support for etcd v3 gRPC-gateway `KV` api  
-*Attention* : Now only KV service can use restful gRPC-gateway.Waiting 3.1 Release.
+This is a basical client support for etcd v2 and v3 api.  
+*Attention* : V2 Api support is in progress.Doc will publish when finish.   
+*Attention* : Now V3 api only KV service can use restful gRPC-gateway.Waiting 3.1 Release.
 
 ## Install && Init
 ``npm install etcd4js``
 
 ## Usage
-Now ``Txn()`` is still in progress.  
 V3 Api require base64 key/value and range_end.This plugin will auto change it.Just input normal string in function.
 
 ``` js
-const etcd4js = require('etcd4js')
+const etcd4js = require('etcd4js').v3 //If want to use v2  require('etcd4js').v2
 let store = new etcd4js('127.0.0.1:2379')
 
 let key = 'hello';
@@ -35,7 +35,7 @@ store.Range(key, {count_only: true})
   //Error
 })
 ```
-## API 
+## V3 API 
 ### `.Put(key, [opt])`
 
 Offical Doc: Put puts the given key into the key-value store. A put request increments the revision of the key-value store and generates one event in the event history.  
