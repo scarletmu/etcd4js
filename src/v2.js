@@ -2,6 +2,7 @@
 'use strict';
 const fetch = require('node-fetch');
 const util = require('./util');
+const formurlencoded = require('form-urlencoded');
 
 const normalizeUrl = util.normalizeUrl;
 
@@ -14,53 +15,70 @@ class V2client {
    * @param key
    * @param value
    */
-  set(key, value){
-    let body = { key, value };
+  set(key, value, ttl){
+    let body = { value, ttl };
     return this._Request('keys', key, 'PUT', body);
   }
   // /**
   //  * get
   //  * @param key 
   //  */
-  // get(key){
-  //   return this._Request('keys', key, 'GET');
-  // }  
+  get(key){
+    return this._Request('keys', key, 'GET');
+  }  
+   /**
+   * update
+   */
+  update(key, value, ttl){
+    return this.set(key, value, ttl);
+  }
   // /**
   //  * rm
   //  */
-  // rm(key){
-
-  // }
-  // /**
-  //  * mkdir
-  //  */
-  // mkdir(key, value){
-
-  // }
-  // /**
-  //  * rmdir
-  //  */
-  // rmdir(key){
-
-  // }
+  rm(key){
+    return this._Request('keys', key, 'DELETE')
+  }
+  /**
+   * Refresh TTL
+   */
+  refresh(key, ttl){
+    let body = { ttl, refresh: true, prevExist: true }
+    return this._Request('keys', key, 'PUT', body)
+  }
+  /**
+   * wait
+   */
+  wait(key){
+    key = key.concat('?wait=true');
+    return this._Request('keys', key, 'GET');
+  }
+  /**
+   * mkdir
+   */
+  mkdir(key, ttl){
+    let body = { dir: true, ttl }
+    return this._Request('keys', key, 'PUT', body);
+  }
+  /**
+   * rmdir
+   */
+  rmdir(key){
+    key = key.concat('?dir=true');
+    return this._Request('keys', key, 'DELETE');
+  }
   // /**
   //  * updatedir
   //  */
   // updatedir(key){
 
   // }
-  // /**
-  //  * ls
-  //  */
-  // ls(key){
-
-  // }
-  // /**
-  //  * update
-  //  */
-  // update(key, value){
-
-  // }
+  /**
+   * ls
+   */
+  ls(key){
+    return this.get(key);
+  }
+ 
   /**
    * Request
    * @param Service name
@@ -69,8 +87,11 @@ class V2client {
    * @param body
    */
   _Request(service, key, method, body){
-    let url = this._host.concat(`/v2/${service}/${key}`) 
-    return fetch(url, {method, body})
+    let url = this._host.concat(`/v2/${service}/${key}`);
+    if(body){
+      body = formurlencoded(body);
+    }
+    return fetch(url, {method, body, headers: { 'Content-Type': 'application/x-www-form-urlencoded' }})
     .then((res) => {
       return res.json();
     })
