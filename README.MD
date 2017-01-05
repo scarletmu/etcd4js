@@ -99,6 +99,7 @@ Offical Doc: 	Compact compacts the event history in the etcd key-value store. Th
 
 ## V2 Client API 
 V2 API will return ETCD raw response in Promise result coz I think that is the best way for everyone's need:)
+
 ### `.set(key, value, [opt])`
 
 Setting the value of a key.
@@ -121,6 +122,7 @@ Get the value of a key.
 ### `.rm(key, [opt])`
 
 Deleting a key.
+
 #### Default option value
 
 ```js
@@ -133,6 +135,10 @@ Deleting a key.
 ### `.update(key, value, ttl)`
 
 Update a key,same as `.set()` function when key already exists;
+
+### `.create(key, value)`
+
+Creating In-Order Keys
 
 ### `.refresh(key, ttl)`
 

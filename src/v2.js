@@ -27,6 +27,13 @@ class V2client {
     return this._Request('keys', key, 'PUT', body);
   }
   /**
+   * create 
+   */
+  create(key, value){
+    let body = { value };
+    return this._Request('keys', key, 'POST', body);
+  }
+  /**
    * get
    * @param key 
    */
