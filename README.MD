@@ -36,7 +36,7 @@ store.Range(key, {count_only: true})
   //Error
 })
 
-//V2 API also based on Promise,but not support option now
+//V2 API also based on Promise.
 storev2.set(key, value)
 .then((res) => {
   //result
@@ -45,7 +45,7 @@ storev2.set(key, value)
   //err
 })
 ```
-## V3 API 
+## V3 KV API 
 ### `.Put(key, [opt])`
 
 Offical Doc: Put puts the given key into the key-value store. A put request increments the revision of the key-value store and generates one event in the event history.  
@@ -97,40 +97,59 @@ Offical Doc: 	Compact compacts the event history in the etcd key-value store. Th
 }
 ```
 
-## V2 API 
+## V2 Client API 
 V2 API will return ETCD raw response in Promise result coz I think that is the best way for everyone's need:)
-### `.set(key, value, ttl)`
+### `.set(key, value, [opt])`
 
-Setting the value of a key.TTL is optional argument,default TTL is none;
+Setting the value of a key.
+
+#### Default option value
+
+```js
+{
+  ttl: (none),
+  prevIndex: (none),
+  prevExist: (none),
+  prevValue: (none)
+}
+```
 
 ### `.get(key)`
 
 Get the value of a key.
 
-### `.rm(key)`
+### `.rm(key, [opt])`
 
 Deleting a key.
+#### Default option value
+
+```js
+{
+  prevIndex: (none),
+  prevValue: (none)
+}
+```
 
 ### `.update(key, value, ttl)`
 
 Update a key,same as `.set()` function when key already exists;
 
-### `refresh(key, ttl)`
+### `.refresh(key, ttl)`
 
 Refresh a key's ttl.
 
-### `wait(key)`
+### `.wait(key)`
 
 Waiting Key changed.While key have changed,Promise will return result;
 
-### `mkdir(key, ttl)`
+### `.mkdir(key, ttl)`
 
 Creating Directories.
 
-### `rmdir(key)`
+### `.rmdir(key)`
 
 Deleting a Directories.
 
-### `ls(key)`
+### `.ls(key)`
 
 Listing a Directories.

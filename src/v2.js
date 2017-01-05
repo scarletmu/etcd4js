@@ -15,8 +15,15 @@ class V2client {
    * @param key
    * @param value
    */
-  set(key, value, ttl){
-    let body = { value, ttl };
+  set(key, value, opt){
+    if(!opt) opt = {}
+    let query = [];
+    let body = { 
+      value, ttl: opt.ttl ,
+      prevExist: opt.prevExist || undefined,
+      prevValue: opt.prevExist || undefined,
+      prevIndex: opt.prevExist || undefined
+    };
     return this._Request('keys', key, 'PUT', body);
   }
   /**
@@ -35,7 +42,18 @@ class V2client {
   /**
    * rm
    */
-  rm(key){
+  rm(key, opt){
+    if(!opt) opt = {};
+    let query = [];
+    if(opt.prevIndex) query.push(`prevIndex=${opt.prevIndex}`);
+    if(opt.prevValue) query.push(`prevValue=${opt.prevValue}`);
+    if(query.length > 0){
+      if(query.length == 1){
+        key = key + '?'.concat(query[0]);
+      }else{
+        key = key + '?'.concat(query.join('&'));
+      }
+    }
     return this._Request('keys', key, 'DELETE')
   }
   /**
@@ -63,7 +81,7 @@ class V2client {
    * rmdir
    */
   rmdir(key){
-    key = key.concat('?dir=true');
+    key = key.concat('?recursive=true');
     return this._Request('keys', key, 'DELETE');
   }
   /**
@@ -88,6 +106,13 @@ class V2client {
     return fetch(url, {method, body, headers: { 'Content-Type': 'application/x-www-form-urlencoded' }})
     .then((res) => {
       return res.json();
+    })
+    .then((json) => {
+      if(json.errorCode){
+        return Promise.reject(json);
+      }else{
+        return Promise.resolve(json);
+      }
     })
   }
 }
