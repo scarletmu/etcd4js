@@ -1,8 +1,8 @@
 # Intro
 
-This is a basical client support for etcd v2 and v3 api.  
-*Attention* : V2 Api support is in progress.Doc will publish when finish.   
-*Attention* : Now V3 api only KV service can use restful gRPC-gateway.Waiting 3.1 Release.
+This is a basical client support for etcd v2 and v3 API.  
+*Attention* : V2 API full support is still in progress.Basical key/value support already finished.   
+*Attention* : Now V3 API only `KV` service can use restful gRPC-gateway.So fully support must waiting 3.1 Release.
 
 ## Install && Init
 ``npm install etcd4js``
@@ -11,8 +11,9 @@ This is a basical client support for etcd v2 and v3 api.
 V3 Api require base64 key/value and range_end.This plugin will auto change it.Just input normal string in function.
 
 ``` js
-const etcd4js = require('etcd4js').v3 //If want to use v2  require('etcd4js').v2
-let store = new etcd4js('127.0.0.1:2379')
+const etcd4js = require('etcd4js'); 
+let store = new etcd4js.v3('127.0.0.1:2379');//V3 API
+let storev2 = new etcd4js.v2();//V2 API Default Use 127.0.0.1:2379
 
 let key = 'hello';
 let value = 'world';
@@ -33,6 +34,15 @@ store.Range(key, {count_only: true})
 })
 .catch((err) => {
   //Error
+})
+
+//V2 API also based on Promise,but not support option now
+storev2.set(key, value)
+.then((res) => {
+  //result
+})
+.catch((err) => {
+  //err
 })
 ```
 ## V3 API 
@@ -86,3 +96,41 @@ Offical Doc: 	Compact compacts the event history in the etcd key-value store. Th
   physical: false
 }
 ```
+
+## V2 API 
+V2 API will return ETCD raw response in Promise result coz I think that is the best way for everyone's need:)
+### `.set(key, value, ttl)`
+
+Setting the value of a key.TTL is optional argument,default TTL is none;
+
+### `.get(key)`
+
+Get the value of a key.
+
+### `.rm(key)`
+
+Deleting a key.
+
+### `.update(key, value, ttl)`
+
+Update a key,same as `.set()` function when key already exists;
+
+### `refresh(key, ttl)`
+
+Refresh a key's ttl.
+
+### `wait(key)`
+
+Waiting Key changed.While key have changed,Promise will return result;
+
+### `mkdir(key, ttl)`
+
+Creating Directories.
+
+### `rmdir(key)`
+
+Deleting a Directories.
+
+### `ls(key)`
+
+Listing a Directories.

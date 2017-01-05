@@ -1,11 +1,10 @@
 'use strict';
-const Clientv3 = require('../index').v3;
-const Clientv2 = require('../index').v2;
+const etcd4js = require('../index');
 const assert = require('assert');
 const should = require('should');
 
-let clientv3 = new Clientv3();
-let clientv2 = new Clientv2();
+let clientv3 = new etcd4js.v3();
+let clientv2 = new etcd4js.v2();
 
 describe('V3Api', () => {
   describe('#Put', () => {
