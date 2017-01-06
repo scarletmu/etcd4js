@@ -110,7 +110,10 @@ class V2client {
    * addMember 
    */
   addMember(peerUrls){
-    let body = { peerUrls: [peerUrls] };
+    if(typeof peerUrls === 'string'){
+      peerUrls = [peerUrls];
+    }
+    let body = { peerUrls };
     body = JSON.stringify(body);
     return this._Request('members', '', 'POST', body, 'application/json');
   }
@@ -124,7 +127,10 @@ class V2client {
    * updateMember
    */
   updateMember(id, peerUrls){
-    let body = { peerUrls: [peerUrls] };
+    if(typeof peerUrls === 'string'){
+      peerUrls = [peerUrls];
+    }
+    let body = { peerUrls };
     body = JSON.stringify(body);
     return this._Request('members', id, 'PUT', body, 'application/json');
   }
@@ -139,7 +145,6 @@ class V2client {
    */
   _Request(service, key, method, body, head){
     let url = this._host.concat(`/v2/${service}/${key}`);
-    console.log(url);
     if(body && !head){
       body = formurlencoded(body);
     }

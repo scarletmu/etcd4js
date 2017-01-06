@@ -4,7 +4,12 @@ This is a basical client support for etcd v2 and v3 API.
 *Attention* : V2 API full support is still in progress.Basical key/value support already finished.   
 *Attention* : Now V3 API only `KV` service can use restful gRPC-gateway.So fully support must waiting 3.1 Release.
 
+## Update Log
+
+Ver 1.1.0 : V2 Member API
+
 ## Install && Init
+
 ``npm install etcd4js``
 
 ## Usage
@@ -159,3 +164,23 @@ Deleting a Directories.
 ### `.ls(key)`
 
 Listing a Directories.
+
+## V2 Members API 
+
+`peerUrls` Could be a string or a array;
+
+### `.members()`
+
+Get cluster members list.
+
+### `.addMember(peerUrls)`
+
+Add member to cluster.
+
+### `.delMember(id)`
+
+Deleting a member in cluster.
+
+### `.updateMember(id, peerUrls)`
+
+Update a member's peerurl.
