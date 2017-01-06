@@ -97,7 +97,39 @@ class V2client {
   ls(key){
     return this.get(key);
   }
- 
+
+  //Members API
+
+  /**
+   * members 
+   */
+  members(){
+    return this._Request('members', '', 'GET');
+  }
+  /**
+   * addMember 
+   */
+  addMember(peerUrls){
+    let body = { peerUrls: [peerUrls] };
+    body = JSON.stringify(body);
+    return this._Request('members', '', 'POST', body, 'application/json');
+  }
+  /**
+   * deleteMember
+   */
+  delMember(id){
+    return this._Request('members', id, 'DELETE');
+  }
+  /**
+   * updateMember
+   */
+  updateMember(id, peerUrls){
+    let body = { peerUrls: [peerUrls] };
+    body = JSON.stringify(body);
+    return this._Request('members', id, 'PUT', body, 'application/json');
+  }
+  
+  //Request Function Use Node-Fetch
   /**
    * Request
    * @param Service name
@@ -105,12 +137,14 @@ class V2client {
    * @param method Using method
    * @param body
    */
-  _Request(service, key, method, body){
+  _Request(service, key, method, body, head){
     let url = this._host.concat(`/v2/${service}/${key}`);
-    if(body){
+    console.log(url);
+    if(body && !head){
       body = formurlencoded(body);
     }
-    return fetch(url, {method, body, headers: { 'Content-Type': 'application/x-www-form-urlencoded' }})
+    let headers = head || 'application/x-www-form-urlencoded'; 
+    return fetch(url, {method, body, headers: { 'Content-Type': headers }})
     .then((res) => {
       return res.json();
     })

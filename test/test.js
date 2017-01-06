@@ -102,4 +102,44 @@ describe('V2Api', () => {
       })
     })
   })
+
+  describe('Member', () => {
+    describe('#members', () => {
+      it('Should List Members', () => {
+        return clientv2.members()
+        .then((data) => {
+          console.log(data);
+          assert.ok(true);
+        })
+      })
+    })
+    describe('#delMember', () => {
+      it('Should Del Member', () => {
+        return clientv2.delMember('91bc3c398fb3c146')
+        .then((data) => {
+          console.log(data);
+          assert.ok(true);
+        })
+      })
+    })
+    describe('#addMember', () => {
+      it('Should Add Members', () => {
+        return clientv2.addMember('http://localhost:22380')
+        .then((data) => {
+          console.log(data);
+          assert.ok(true);
+        })
+      })
+    })
+    describe('#updateMember', () => {
+      it('Should Update Members', () => {
+        return clientv2.updateMember('fd422379fda50e48', 'http://localhost:32380')
+        .then((data) => {
+          console.log(data);
+          assert.ok(true);
+        })
+      })
+    })
+    
+  })
 })
