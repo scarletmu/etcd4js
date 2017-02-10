@@ -159,7 +159,8 @@ class V2client {
       'Content-Type': contentType
     }; 
     if(typeof this._username !== 'undefined' && typeof this._password !== 'undefined'){
-      headers.Authorization = `Base ${this._username}:${this._password}`;  
+      let baseStr = util.b64(`${this._username}:${this._password}`);
+      headers.Authorization = `Basic ${baseStr}`;  
     }
     return fetch(url, {method, body, headers})
     .then((res) => {
