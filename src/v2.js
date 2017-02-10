@@ -151,7 +151,7 @@ class V2client {
    */
   _Request(service, key, method, body, content){
     let url = this._host.concat(`/v2/${service}/${key}`);
-    if(body && !head){
+    if(body && !content){
       body = formurlencoded(body);
     }
     let contentType = content || 'application/x-www-form-urlencoded',
