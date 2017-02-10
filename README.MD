@@ -6,7 +6,7 @@ This is a basical client support for etcd v2 and v3 API.
 
 ## Update Log
 
-Ver 1.1.0 : V2 Member API
+Ver 1.1.1 : Add V2 API BasicAuth
 
 ## Install && Init
 
