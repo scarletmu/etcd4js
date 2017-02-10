@@ -9,6 +9,12 @@ const normalizeUrl = util.normalizeUrl;
 class V2client {
   constructor(host, options){
     this._host = normalizeUrl(host || '127.0.0.1');
+    this._username = undefined;
+    this._password = undefined;
+  }
+  setAuth(username, password){
+    this._username = username;
+    this._password = password;
   }
   /**
    * set
@@ -143,13 +149,19 @@ class V2client {
    * @param method Using method
    * @param body
    */
-  _Request(service, key, method, body, head){
+  _Request(service, key, method, body, content){
     let url = this._host.concat(`/v2/${service}/${key}`);
     if(body && !head){
       body = formurlencoded(body);
     }
-    let headers = head || 'application/x-www-form-urlencoded'; 
-    return fetch(url, {method, body, headers: { 'Content-Type': headers }})
+    let contentType = content || 'application/x-www-form-urlencoded',
+    headers = {
+      'Content-Type': contentType
+    }; 
+    if(typeof this._username !== 'undefined' && typeof this._password !== 'undefined'){
+      headers.Authorization = `Base ${this._username}:${this._password}`;  
+    }
+    return fetch(url, {method, body, headers})
     .then((res) => {
       return res.json();
     })

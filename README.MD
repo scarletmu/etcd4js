@@ -20,6 +20,9 @@ const etcd4js = require('etcd4js');
 let store = new etcd4js.v3('127.0.0.1:2379');//V3 API
 let storev2 = new etcd4js.v2();//V2 API Default Use 127.0.0.1:2379
 
+let username = 'root', password = 'test';
+storev2.setAuth(username, password);//Use user to access auth
+
 let key = 'hello';
 let value = 'world';
 
